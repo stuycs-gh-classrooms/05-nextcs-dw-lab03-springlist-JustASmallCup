@@ -18,7 +18,7 @@ class OrbNode extends Orb {
       if (dnext < SPRING_LENGTH) { stroke(0, 255, 0); }
       else if (dnext > SPRING_LENGTH) { stroke(255, 0, 0); }
       else { stroke(0); }
-      line(this.center.x, this.center.y+2, next.center.x, next.center.y+2);
+      line(this.center.x, this.center.y+3, next.center.x, next.center.y+3);
     }//next spring
 
     if (previous != null) {
@@ -26,7 +26,7 @@ class OrbNode extends Orb {
       if (dprev < SPRING_LENGTH) { stroke(0, 255, 0); }
       else if (dprev > SPRING_LENGTH) { stroke(255, 0, 0); }
       else { stroke(0); }
-      line(this.center.x, this.center.y-2, previous.center.x, previous.center.y-2);
+      line(this.center.x, this.center.y-3, previous.center.x, previous.center.y-3);
     }//next spring
   }//drawSpring
 

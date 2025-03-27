@@ -47,8 +47,9 @@ class OrbList {
       front = o;
     }
     else {
-      front = o.next;
-      o = front;
+      o.next = front;
+      front.previous = o;
+      front = o;
     }
   }//addFront
 
