@@ -1,25 +1,3 @@
-/* ===================================
-SpringListDriver (No Work Goes Here)
-
-This program will work similarly to SpringArrayDriver,
-but it will use a linked list of OrbNodes instead of
-an array. This driver file is complete, all your work should
-be done in the OrbList class. When working, the program can
-be controlled as follows:
-
-Keyboard commands:
-  1: Create a new list of orbs in a line.
-  2: Create a new list of random orbs.
-  =: add a new node to the front of the list
-  -: remove the node at the front
-  SPACE: Toggle moving on/off
-  g: Toggle earth gravity on/off
-
-Mouse Commands:
-  mousePressed: if the mouse is over an
-    orb, remove it from the list.
-=================================== */
-
 
 int NUM_ORBS = 10;
 int MIN_SIZE = 10;
@@ -31,13 +9,15 @@ float D_COEF = 0.1;
 
 int SPRING_LENGTH = 50;
 float  SPRING_K = 0.005;
+float FRICTION_K = .1;
 
 int MOVING = 0;
 int BOUNCE = 1;
 int GRAVITY = 2;
 int DRAGF = 3;
-boolean[] toggles = new boolean[4];
-String[] modes = {"Moving", "Bounce", "Gravity", "Drag"};
+int FRICTION = 4;
+boolean[] toggles = new boolean[5];
+String[] modes = {"Moving", "Bounce", "Gravity", "Drag", "Friction"};
 
 FixedOrb earth;
 
@@ -59,12 +39,21 @@ void draw() {
   slinky.display();
 
   if (toggles[MOVING]) {
-
+    
     slinky.applySprings(SPRING_LENGTH, SPRING_K);
 
     if (toggles[GRAVITY]) {
       slinky.applyGravity(earth, GRAVITY);
     }
+    
+    if (toggles[FRICTION]) {
+      slinky.applyFriction(FRICTION_K);
+    }
+
+    if (toggles[DRAGF]) {
+      slinky.applyDrag(D_COEF);
+    }
+    
     slinky.run(toggles[BOUNCE]);
   }//moving
 }//draw
@@ -81,6 +70,7 @@ void keyPressed() {
   if (key == 'g') { toggles[GRAVITY] = !toggles[GRAVITY]; }
   if (key == 'b') { toggles[BOUNCE] = !toggles[BOUNCE]; }
   if (key == 'd') { toggles[DRAGF] = !toggles[DRAGF]; }
+  if (key == 'f') { toggles[FRICTION] = !toggles[FRICTION]; }
   if (key == '=' || key =='+') {
     slinky.addFront(new OrbNode());
   }

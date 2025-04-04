@@ -78,6 +78,15 @@ class Orb {
 
     return direction;
   }//getSpring
+  
+  PVector getFriction(float k){
+    if(center+
+    PVector nForce = acceleration.mult(mass);
+    PVector fForce = nForce.mult(k);
+    fForce.y = 0;
+    fForce.mult(-1);
+    return fForce;
+  }
 
   boolean yBounce(){
     if (center.y > height - bsize/2) {
